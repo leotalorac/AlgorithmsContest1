@@ -10,31 +10,33 @@ void reverse(string str)
 int main(){
     //read the variable of the text
     string word;
-    cin>>word;
-    int pos = 0;
-    int n = word.length();
-    string toadd ="";
-    string toadd2 ="";
-    for (int i = n-1; i>0; i--)
-    {
-        //cout<<word[pos]<<" "<<word[i]<<" "<<i<<"\n";
-        if(word[pos] != word[i]){
-            //cout<<"diferent"<<endl;
-            i=n;
-            if(toadd2 == "")
-                toadd = word[pos]+toadd;
-            else{
-                toadd = word[pos]+toadd2+toadd;
-                toadd2="";
-            }
-        }else{
-            toadd2 = word[pos]+toadd2;
-        }
-        if(pos==(n-1)){
-            break;
-        }
-        pos++;
-    }
-    cout<<(word+toadd);
+	string toadd = "";
+	bool pal;
+	int pos;
+	cin >>word;
+    int n = word.size()-1;
+	pos = n - 1;
+    
+	for (int i = 0; i <= n; i++) { 
+		
+		pal = true;
+		for (int j = i; j <= i + (n - i) / 2; j++) {
+            //cout<<word[j]<<" "<<word[n - (j - i)]<<endl;
+			if (word[j] != word[n - (j - i)]) {
+				pal = false;
+				break;
+			}
+		}
+		
+		if (pal) {
+			pos = i;
+			break;
+		}
+	}
+	
+	for (int i = pos - 1; i >= 0; i--){ 
+		toadd += word[i];
+	}
+    cout<<word<<toadd<<endl;
     return 0;
 }
